@@ -3,3 +3,7 @@
   description: Paste your SSH public key to access the virtual machine via SSH
   required: true
 
+- name: allowed_cidr
+  title: Allowed IP range (CIDR)
+  description: Your public IP in CIDR form (e.g. 203.0.113.10/32). Only this range can reach SSH (22) and the n8n editor (5678). 0.0.0.0/0 is rejected.
+  required: true

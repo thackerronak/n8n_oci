@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    oci = {
+      source = "oracle/oci"
+    }
+  }
+}
+
 provider "oci" {}
 
 data "oci_identity_tenancy" "this" {
@@ -26,7 +34,8 @@ resource "oci_core_virtual_network" "n8n_vcn" {
   dns_label      = "n8nvcn"
 }
 
-# Security list allowing SSH, HTTP/HTTPS and n8n ports
+# Security list: SSH and the n8n editor are limited to var.allowed_cidr;
+# HTTP/HTTPS stay public for Let's Encrypt and webhooks.
 resource "oci_core_security_list" "n8n_security" {
   compartment_id = local.compartment_ocid
   vcn_id         = oci_core_virtual_network.n8n_vcn.id
@@ -40,7 +49,7 @@ resource "oci_core_security_list" "n8n_security" {
 
   ingress_security_rules {
     protocol    = "6" # TCP
-    source      = "0.0.0.0/0"
+    source      = var.allowed_cidr
     source_type = "CIDR_BLOCK"
     tcp_options {
       min = 22
@@ -70,7 +79,7 @@ resource "oci_core_security_list" "n8n_security" {
 
   ingress_security_rules {
     protocol    = "6"
-    source      = "0.0.0.0/0"
+    source      = var.allowed_cidr
     source_type = "CIDR_BLOCK"
     tcp_options {
       min = 5678
