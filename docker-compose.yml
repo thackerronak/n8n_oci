@@ -7,8 +7,8 @@ services:
     ports:
       - "5678:5678"
     environment:
-      - GENERIC_TIMEZONE=Europe/Madrid
-      - TZ=Europe/Madrid
+      - GENERIC_TIMEZONE=Asia/Kolkata
+      - TZ=Asia/Kolkata
       # Only needed while serving over plain HTTP; remove once HTTPS is enabled.
       - N8N_SECURE_COOKIE=false
       - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true

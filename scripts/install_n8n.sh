@@ -4,7 +4,7 @@ set -euo pipefail
 # Pinned n8n release. Bump deliberately after checking
 # https://github.com/n8n-io/n8n/security/advisories and the release notes.
 N8N_VERSION="2.42.6"
-N8N_TIMEZONE="Europe/Madrid"
+N8N_TIMEZONE="Asia/Kolkata"
 
 # Ensure all files are created in the user's home directory
 cd "${HOME:-/root}"
